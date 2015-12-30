@@ -1,14 +1,9 @@
-angular.module('redditClone',[])
-.controller('MainCtrl',[
-  '$scope',
-  function($scope){
+var app = angular.module('RedditClone',[])
+app.controller('MainCtrl',[
+  '$scope', 'posts',
+  function($scope, posts){
     $scope.test = "Hello World!";
-    $scope.posts = [
-      {title:'test1', upvotes: 5},
-      {title:'test2', upvotes: 2},
-      {title:'test2', upvotes: 2}
-
-    ]
+    $scope.posts = posts.posts
     $scope.addPost = function(){
       if(!$scope.title || $scope.title === '') {return alert('Post must have title');}
       $scope.posts.push({
@@ -26,3 +21,9 @@ angular.module('redditClone',[])
   }
 
 ])
+app.factory('posts',[function(){
+  var o = {
+    posts: [ title:'ngdgdfg']
+  };
+  return o
+}])

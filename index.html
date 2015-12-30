@@ -1,33 +1,59 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Rails Angular</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script src="app.js"></script>
-  </head>
-  <body ng-app="redditClone" ng-controller="MainCtrl">
-    <div>
-      <p ng-bind="test"></p>
-      <div ng-repeat="post in posts | orderBy:'-upvotes'">
-        <span ng-click="incrementUpvotes(post)">^</span>
-        <span ng-click="decrementUpvotes(post)">v</span>
-        <a href="{{post.link}}" ng-show="post.link">
-          {{post.title}}
-        </a>
-        <span ng-hide="post.link">
-          {{post.title}}
-        </span>
-        - upvotes:
-        {{post.upvotes}}
+
+<head>
+  <meta charset="utf-8">
+  <title>Rails Angular</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw=="
+  crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="app.js"></script>
+</head>
+
+<body ng-app="RedditClone" ng-controller="MainCtrl">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+      <div class="page-header">
+        <h1>Reddit Clone</h1>
       </div>
-      <form ng-submit="addPost()">
-        <input ng-model="title" placeholder="Title" type="text"></input>
-        <br>
-        <input name="name" placeholder="Link" type="text">
-        <br>
-        <button type="submit">Post</button>
+
+      <div ng-repeat="post in posts | orderBy:'-upvotes'">
+        <span class="glyphicon glyphicon-thumbs-up"
+          ng-click="incrementUpvotes(post)"></span>
+          <span ng-click="decrementUpvotes(post)" class="glyphicon glyphicon-thumbs-down"></span>
+        {{post.upvotes}}
+        <span class="text-­primary">
+          <a ng-show="post.link" href="{{post.link}}">
+            {{post.title}}
+          </a>
+          <span ng-hide="post.link">
+            {{post.title}}
+          </span>
+        </span>
+      </div>
+
+      <form ng-submit="addPost()"
+        style="margin-top:30px;">
+        <h3>Add a new post</h3>
+
+        <div class="form-group">
+          <input type="text"
+            class="form-control"
+            placeholder="Title"
+            ng-model="title"></input>
+        </div>
+        <div class="form-group">
+          <input type="text"
+          class="form-control"
+          placeholder="Link"
+          ng-model="link"></input>
+        </div>
+        <button type="submit" class="btn btn-primary">Post</button>
       </form>
+
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
